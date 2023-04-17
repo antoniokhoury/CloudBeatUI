@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.mat-table {
+    flex: 1;
+}
+
+.footer {
+    flex-shrink: 0;
+}
+
+.mat-paginator-navigation button:hover {
+    background-color: transparent;
+    color: black;
+}

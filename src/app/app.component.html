@@ -1,36 +1,46 @@
-<html>
-<table>
-    <thead>
-        <tr>
-            <th>Patient ID</th>
-            <th>Name</th>
-            <th>Date of Birth</th>
-            <th>Study Start Date</th>
-            <th>Study End Time</th>
-            <th>Device Serial Number</th>
-            <th>Total Number of Events</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr (click)="openChart(1, 'Elton', '01/02/1980', '3/30/2018 11:00', '4/13/2018 11:00', 'A123456', 2)">
-            <td>1</td>
-            <td>Elton</td>
-            <td>01/02/1980</td>
-            <td>3/30/2018 11:00</td>
-            <td>4/13/2018 11:00</td>
-            <td>A123456</td>
-            <td>2</td>
-        </tr>
-        <tr (click)="openChart(2, 'Amie', '16/04/1960', '2/01/2018 15:00', '2/23/2018 15:00', 'A875612', 10)">
-            <td>2</td>
-            <td>Amie</td>
-            <td>16/04/1960</td>
-            <td>2/01/2018 15:00</td>
-            <td>2/23/2018 15:00</td>
-            <td>A875612</td>
-            <td>10</td>
-        </tr>
-    </tbody>
-</table>
+<div class="container" style="max-height: 600px; overflow-y: auto;">
+    <mat-table [dataSource]="paginatedPatients" class="mat-elevation-z8" [ngStyle]="{ 'min-width': '650px' }">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef> Patient ID </mat-header-cell>
+            <mat-cell *matCellDef="let patient" (click)="openChart(patient)"> {{ patient.id }} </mat-cell>
+        </ng-container>
 
-</html>
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell *matCellDef="let patient"> {{ patient.name }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="dateOfBirth">
+            <mat-header-cell *matHeaderCellDef> Date of Birth </mat-header-cell>
+            <mat-cell *matCellDef="let patient"> {{ patient.dateOfBirth }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="studyStartTime">
+            <mat-header-cell *matHeaderCellDef> Study Start Time </mat-header-cell>
+            <mat-cell *matCellDef="let patient"> {{ patient.studyStartTime }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="studyEndTime">
+            <mat-header-cell *matHeaderCellDef> Study End Time </mat-header-cell>
+            <mat-cell *matCellDef="let patient"> {{ patient.studyEndTime }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="deviceSerialNumber">
+            <mat-header-cell *matHeaderCellDef> Device Serial Number </mat-header-cell>
+            <mat-cell *matCellDef="let patient"> {{ patient.device.serialNumber }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="totalNumberOfEvents">
+            <mat-header-cell *matHeaderCellDef> Total Number of Events </mat-header-cell>
+            <mat-cell *matCellDef="let patient"> {{ patient.events.length }} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openChart(row)"></mat-row>
+    </mat-table>
+
+    <div class="footer">
+        <mat-paginator [length]="totalPatients" [pageIndex]="page" [pageSize]="pageSize" (page)="changePage($event)">
+        </mat-paginator>
+    </div>
+</div>

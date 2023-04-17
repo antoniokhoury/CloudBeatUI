@@ -2,6 +2,20 @@
     <h1 mat-dialog-title>Chart</h1>
     <div mat-dialog-content>
         <div id="container"></div>
+        <div id="summary">
+            <div>
+                <span>Patient Name: {{ patientName }}</span>
+            </div>
+            <div>
+                <span>Minimum Heart Rate: {{ minHeartRate }}</span>
+            </div>
+            <div>
+                <span>Average Heart Rate: {{ avgHeartRate }}</span>
+            </div>
+            <div>
+                <span>Maximum Heart Rate: {{ maxHeartRate }}</span>
+            </div>
+        </div>
     </div>
     <div mat-dialog-actions>
         <button mat-button (click)="onCloseClick()">Close</button>
